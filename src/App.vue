@@ -50,17 +50,25 @@ export default {
                 
                 return this.moviesList[i].original_title
               }
+                  console.log(this.moviesList[i].original_title)
 
                 if (text == this.moviesList.title) {
                 
                 return this.moviesList[i].title
               }
+                 console.log(this.moviesList[i].title)
 
               if (text == this.moviesList.vote_average) {
                 
                 return this.moviesList[i].vote_average
               }
-              console.log(this.moviesList[i].vote_average)
+               console.log(this.moviesList[i].vote_average)
+
+               if (text == this.moviesList.original_language) {
+                
+                return this.moviesList[i].original_language
+              }
+              console.log(this.moviesList[i].original_language)
               }
             
 
