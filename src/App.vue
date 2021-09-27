@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       moviesList: [],
+      ApiSeries: [],
       APIurl:
         "https://api.themoviedb.org/3/search/movie?api_key=72fd9500b954a9cf78a65ac500e01314&query=",
       inputText: "Test",
@@ -26,6 +27,7 @@ export default {
   },
   created() {
     this.getMovies();
+    this.getSeries();
   },
   computed: {
     filteredMoviesList() {
@@ -51,6 +53,16 @@ export default {
           console.log("Error ", err);
         });
     },
+      getSeries() {
+      axios
+        .get(this.APIurl + this.inputText)
+        .then((res) => {
+          this.moviesList = res.data.results;
+        })
+        .catch((err) => {
+          console.log("Error ", err);
+        });
+    },
     startSearch(text) {
       this.inputText = text;
     },
@@ -60,4 +72,7 @@ export default {
 
 <style lang="scss">
 @import "/style/general.scss";
+#app {
+  font-weight: 700;
+}
 </style>
