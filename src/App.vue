@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="bg-secondary">
     <Header @startSearch="startSearch" />
-    <Cards :filteredList="filteredMoviesList" />
+    <Cards :filteredList="filteredMoviesList" :filteredTvList="filteredTvList" />
   </div>
 </template>
 
@@ -22,7 +22,10 @@ export default {
       seriesList: [],
       APIurl:
         "https://api.themoviedb.org/3/search/movie?api_key=72fd9500b954a9cf78a65ac500e01314&query=",
-      inputText: "Test",
+      apiSearchingSeries: "https://api.themoviedb.org/3/search/tv?api_key=72fd9500b954a9cf78a65ac500e01314&language=en-US&page=1&query=",
+      APIkey:"72fd9500b954a9cf78a65ac500e01314&query=",
+      TvText: 'tv',
+      inputText: 'test',
     };
   },
   created() {
@@ -40,20 +43,20 @@ export default {
       return filteredList;
     },
 
-    filteredSeriesList() {
+    filteredTvList() {
       if (this.inputText === "") {
-        return this.moviesList;
+        return this.seriesList
       }
-      let filteredSeries = this.moviesList.filter((item) => {
-        return item.title.toLowerCase().includes(this.inputText.toLowerCase());
-      });
-      return filteredSeries;
-    },
+      let filteredTvList = this.seriesList.filter((item) => {
+        return item.name.toLowerCase().includes(this.TvText.toLowerCase());
+         });
+      return filteredTvList
+    }
   },
   methods: {
     getMovies() {
       axios
-        .get(this.APIurl + this.inputText)
+        .get(this.APIurl + this.TvText)
         .then((res) => {
           this.moviesList = res.data.results;
         })
@@ -61,9 +64,9 @@ export default {
           console.log("Error ", err);
         });
     },
-    getSeries() {
+  getSeries() {
       axios
-        .get(this.APIurl + "tv")
+        .get(this.apiSearchingSeries + this.inputText)
         .then((res) => {
           this.seriesList = res.data.results;
         })
@@ -73,6 +76,8 @@ export default {
     },
     startSearch(text) {
       this.inputText = text;
+      this.getSeries(),
+      this.getMovies()
     },
   },
 };

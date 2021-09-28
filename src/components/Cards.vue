@@ -3,6 +3,10 @@
     <section class="row justify-content-center">
       <Card v-for="(movie, index) in filteredList" :key="index" :card="movie" />
     </section>
+
+      <section class="row justify-content-center">
+      <Card v-for="(movie, index) in filteredTvList" :key="index" :card="movie" />
+    </section>
   </main>
 </template>
 
@@ -17,6 +21,7 @@ export default {
   },
   props: {
     filteredList: Array,
+    filteredTvList: Array
   },
 };
 </script>
