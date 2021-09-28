@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       moviesList: [],
-      ApiSeries: [],
+      seriesList: [],
       APIurl:
         "https://api.themoviedb.org/3/search/movie?api_key=72fd9500b954a9cf78a65ac500e01314&query=",
       inputText: "Test",
@@ -34,13 +34,21 @@ export default {
       if (this.inputText === "") {
         return this.moviesList;
       }
-      let filteredList = this.moviesList.filter( item => {
-        return item.title
-                  .toLowerCase()
-                  .includes(this.inputText.toLowerCase());
-      })
+      let filteredList = this.moviesList.filter((item) => {
+        return item.title.toLowerCase().includes(this.inputText.toLowerCase());
+      });
       return filteredList;
-    }
+    },
+
+    filteredSeriesList() {
+      if (this.inputText === "") {
+        return this.moviesList;
+      }
+      let filteredSeries = this.moviesList.filter((item) => {
+        return item.title.toLowerCase().includes(this.inputText.toLowerCase());
+      });
+      return filteredSeries;
+    },
   },
   methods: {
     getMovies() {
@@ -53,11 +61,11 @@ export default {
           console.log("Error ", err);
         });
     },
-      getSeries() {
+    getSeries() {
       axios
-        .get(this.APIurl + this.inputText)
+        .get(this.APIurl + "tv")
         .then((res) => {
-          this.moviesList = res.data.results;
+          this.seriesList = res.data.results;
         })
         .catch((err) => {
           console.log("Error ", err);
