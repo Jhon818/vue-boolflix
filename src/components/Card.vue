@@ -49,6 +49,7 @@ export default {
   height: 500px;
   border: 1px solid #f1f1f1;
   perspective: 1000px;
+ 
   
 
   .flag {
@@ -93,6 +94,7 @@ export default {
   background-color: dodgerblue;
   color: white;
   transform: rotateY(180deg);
+   position: inherit;
 }
 
 
