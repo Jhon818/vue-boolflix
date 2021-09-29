@@ -1,6 +1,6 @@
 <template>
   <main class="container-lg">
-    <section class="row justify-content-center">
+    <section class="row justify-content-center overflow">
       <Card v-for="(movie, index) in filteredList" :key="index" :card="movie" />
     </section>
 

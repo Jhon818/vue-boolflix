@@ -91,7 +91,7 @@ export default {
 
 
 .flip-card-back {
-  background-color: dodgerblue;
+  background-color: black;
   color: white;
   transform: rotateY(180deg);
    position: inherit;

@@ -35,20 +35,22 @@ export default {
   computed: {
     filteredMoviesList() {
       if (this.inputText === "") {
+        console.log(this.moviesList)
         return this.moviesList;
       }
       let filteredList = this.moviesList.filter((item) => {
         return item.title.toLowerCase().includes(this.inputText.toLowerCase());
       });
+      console.log(filteredList)
       return filteredList;
     },
 
     filteredTvList() {
-      if (this.inputText === "") {
+      if (this.inputText !== "") {
         return this.seriesList
       }
       let filteredTvList = this.seriesList.filter((item) => {
-        return item.name.toLowerCase().includes(this.TvText.toLowerCase());
+        return item.name.toLowerCase().includes(this.inputText.toLowerCase());
          });
       return filteredTvList
     }
@@ -56,7 +58,7 @@ export default {
   methods: {
     getMovies() {
       axios
-        .get(this.APIurl + this.TvText)
+        .get(this.APIurl + this.inputText)
         .then((res) => {
           this.moviesList = res.data.results;
         })
